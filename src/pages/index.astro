@@ -99,11 +99,22 @@ import Layout from '../layouts/Layout.astro';
 		object-fit: cover;
 	}
 
+	@media screen and (max-width: 600px) {
+		li {
+			margin-right: 0.5rem;
+		}
+		.thumbnail {
+			width: 320px;
+			height: 180px;
+		}
+	}
+
 	.description {
 		position: absolute;
 		left: 1rem;
 		bottom: 1rem;
 		padding: 0.5rem 1rem;
+		margin: 0;
 		border-radius: 1rem;
 		background: rgba(0, 0, 0, 0.6);
 		color: #eee;
