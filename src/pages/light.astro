@@ -156,6 +156,9 @@ import Layout from '../layouts/Layout.astro';
 
 		p.mouseDragged = () => {
 			hueOffset++;
+			p.stroke(p.color('rgba(255, 255, 255, 0.5)'));
+			p.noFill();
+			p.ellipse(p.mouseX, p.mouseY, 40, 40);
 		};
 	};
 	new p5(sketch);
