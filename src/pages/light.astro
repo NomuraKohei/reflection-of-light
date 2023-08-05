@@ -38,7 +38,6 @@ import Layout from '../layouts/Layout.astro';
 	const sketch = (p: p5) => {
 		p.setup = () => {
 			p.createCanvas(p.windowWidth, p.windowHeight);
-			p.noLoop();
 		};
 
 		const initPosition = () => {
@@ -145,16 +144,11 @@ import Layout from '../layouts/Layout.astro';
 		};
 
 		p.draw = () => {
-			let n = 0;
-
-			while (n < 2000) {
-				p.background(0);
-				p.strokeWeight(2);
-				lights.forEach((item) => {
-					drawLine(item);
-				});
-				n++;
-			}
+			p.background(0);
+			p.strokeWeight(2);
+			lights.forEach((item) => {
+				drawLine(item);
+			});
 		};
 	};
 	new p5(sketch);
