@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Reflection of light">
+	<main></main>
+</Layout>
+
+<script>
+	import p5 from 'p5';
+
+	interface Line {
+		startX: number;
+		startY: number;
+		endX: number;
+		endY: number;
+		isDrawed: boolean;
+	}
+
+	interface Pos {
+		x: number;
+		y: number;
+	}
+
+	interface Dir {
+		x: number;
+		y: number;
+	}
+
+	interface Light {
+		colorName: string;
+		hue: string;
+		lines: Line[];
+		position: Pos;
+		speed: Dir;
+	}
+
+	const sketch = (p: p5) => {
+		p.setup = () => {
+			p.createCanvas(p.windowWidth, p.windowHeight);
+			p.noLoop();
+		};
+
+		const initPosition = () => {
+			return { x: p.random(0, p.windowWidth), y: p.random(0, p.windowHeight) };
+		};
+
+		const initSpeed = () => {
+			return { x: p.random(-25, 25), y: p.random(-25, 25) };
+		};
+
+		const lights: Light[] = [
+			{
+				colorName: 'red',
+				hue: '0',
+				lines: [],
+				position: initPosition(),
+				speed: initSpeed(),
+			},
+			{
+				colorName: 'yellow',
+				hue: '60',
+				lines: [],
+				position: initPosition(),
+				speed: initSpeed(),
+			},
+			{
+				colorName: 'green',
+				hue: '120',
+				lines: [],
+				position: initPosition(),
+				speed: initSpeed(),
+			},
+			{
+				colorName: 'skyblue',
+				hue: '180',
+				lines: [],
+				position: initPosition(),
+				speed: initSpeed(),
+			},
+			{
+				colorName: 'blue',
+				hue: '240',
+				lines: [],
+				position: initPosition(),
+				speed: initSpeed(),
+			},
+			{
+				colorName: 'purple',
+				hue: '300',
+				lines: [],
+				position: initPosition(),
+				speed: initSpeed(),
+			},
+		];
+
+		const SATURATION = '100%';
+		const LIGHTNESS = '50%';
+		const ALPHA = '0.3';
+
+		const drawLine = (light: Light) => {
+			if (!light.lines.length) {
+				light.lines.push({
+					startX: light.position.x,
+					startY: light.position.y,
+					endX: light.position.x,
+					endY: light.position.y,
+					isDrawed: false,
+				});
+			}
+			p.stroke(p.color(`hsla(${light.hue}, ${SATURATION}, ${LIGHTNESS}, ${ALPHA})`));
+			light.lines.forEach((item, index) => {
+				p.line(item.startX, item.startY, item.endX, item.endY);
+				if (item.isDrawed) {
+					return;
+				}
+				light.lines[index].endX = light.position.x;
+				light.lines[index].endY = light.position.y;
+			});
+			light.position.x = light.position.x + light.speed.x;
+			light.position.y = light.position.y + light.speed.y;
+
+			if (light.position.y > p.windowHeight || light.position.y < 0) {
+				light.speed.y *= -1;
+				light.lines[light.lines.length - 1].isDrawed = true;
+				light.lines.push({
+					startX: light.position.x,
+					startY: light.position.y,
+					endX: light.position.x,
+					endY: light.position.y,
+					isDrawed: false,
+				});
+			}
+			if (light.position.x > p.windowWidth || light.position.x < 0) {
+				light.speed.x *= -1;
+				light.lines[light.lines.length - 1].isDrawed = true;
+				light.lines.push({
+					startX: light.position.x,
+					startY: light.position.y,
+					endX: light.position.x,
+					endY: light.position.y,
+					isDrawed: false,
+				});
+			}
+		};
+
+		p.draw = () => {
+			let n = 0;
+
+			while (n < 2000) {
+				p.background(0);
+				p.strokeWeight(2);
+				lights.forEach((item) => {
+					drawLine(item);
+				});
+				n++;
+			}
+		};
+	};
+	new p5(sketch);
+</script>

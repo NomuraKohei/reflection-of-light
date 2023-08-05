@@ -2,34 +2,105 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Welcome to Astro.">
-	<main></main>
+<Layout title="Reflection of light">
+	<main>
+		<section class="titleSection">
+			<h1>Generative Art</h1>
+			<p class="name">@NOMURA</p>
+		</section>
+		<div class="cardsWrapper">
+			<ul>
+				<li>
+					<a class="card" href="./light">
+						<img src="/light.webp" width="400" height="225" alt="light" class="thumbnail" />
+						<p class="description">Light</p>
+					</a>
+				</li>
+				<li>
+					<a class="card" href="./spin.astro">
+						<img src="/spin.webp" width="400" height="225" alt="spin" class="thumbnail" />
+						<p class="description">Spin</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</main>
 </Layout>
 
-<script>
-	import p5 from 'p5';
+<style>
+	main {
+		display: grid;
+		grid-template-rows: 1fr 1fr;
+		height: 100%;
+		background: #fff;
+		color: #333;
+	}
 
-	const sketch = (p: p5) => {
-		p.setup = () => {
-			p.createCanvas(p.windowWidth, p.windowHeight);
-			p.noStroke();
-			p.noLoop();
-		};
+	.titleSection {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-left: 6rem;
+	}
 
-		const drawCircle = (x: number, radius: number, level: number) => {
-			const tt = (126 * level) / 4.0;
-			p.fill(tt);
-			p.ellipse(x, p.windowHeight / 2, radius * 2, radius * 2);
-			if (level > 1) {
-				level = level - 1;
-				drawCircle(x - radius / 2, radius / 2, level);
-				drawCircle(x + radius / 2, radius / 2, level);
-			}
-		};
+	h1 {
+		font-size: 2rem;
+		margin: 0 0 1rem 0;
+		letter-spacing: 0.5rem;
+	}
 
-		p.draw = () => {
-			drawCircle(p.windowWidth / 2, 280, 6);
-		};
-	};
-	new p5(sketch);
-</script>
+	.name {
+		margin: 0;
+		letter-spacing: 0.1rem;
+	}
+
+	@media screen and (max-width: 600px) {
+		.titleSection {
+			margin-left: 1rem;
+		}
+	}
+
+	.cardsWrapper {
+		width: 100%;
+		overflow-x: scroll;
+	}
+
+	ul {
+		padding: 0;
+		list-style-type: none;
+		display: flex;
+		padding: 0 4rem;
+	}
+
+	@media screen and (max-width: 600px) {
+		ul {
+			padding: 0;
+		}
+	}
+
+	li {
+		margin: 1rem;
+	}
+
+	.card {
+		display: inline-block;
+		position: relative;
+		border-radius: 1rem;
+		overflow: hidden;
+	}
+
+	.thumbnail {
+		display: block;
+		object-fit: cover;
+	}
+
+	.description {
+		position: absolute;
+		left: 1rem;
+		bottom: 1rem;
+		padding: 0.5rem 1rem;
+		border-radius: 1rem;
+		background: rgba(0, 0, 0, 0.6);
+		color: #eee;
+	}
+</style>

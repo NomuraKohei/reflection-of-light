@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Reflection of light">
+	<main></main>
+</Layout>
+
+<script>
+	import p5 from 'p5';
+
+	const sketch = (p: p5) => {
+		p.setup = () => {
+			p.createCanvas(p.windowWidth, p.windowHeight);
+		};
+
+		const point = { x: 0, y: p.windowHeight };
+		const point2 = { x: 0, y: p.windowHeight };
+		let angle = 0;
+		let angle2 = 0;
+		let isStartWhite = false;
+		const veticals = [...Array(Math.floor(p.windowWidth / 100))].map((_, i) => i * 100);
+
+		p.draw = () => {
+			p.stroke(0);
+			p.fill(0);
+			p.strokeWeight(10);
+
+			veticals.forEach((item) => {
+				p.point(item + point.x, point.y);
+			});
+
+			point.x = point.x + 120 * p.sin(angle);
+			point.y = point.y + 10 * p.cos(angle) - 1;
+			angle++;
+
+			if (point.y < p.windowHeight / 2) {
+				isStartWhite = true;
+			}
+
+			if (isStartWhite) {
+				p.stroke(255);
+				p.fill(255);
+				p.strokeWeight(10);
+				veticals.forEach((item) => {
+					p.point(item + point2.x, point2.y);
+				});
+				point2.x = point2.x + 120 * p.sin(angle2);
+				point2.y = point2.y + 10 * p.cos(angle2) - 1;
+				angle2++;
+			}
+
+			if (point.y < 0) {
+				point.y = p.windowHeight;
+			}
+			if (point2.y < 0) {
+				point2.y = p.windowHeight;
+			}
+		};
+	};
+	new p5(sketch);
+</script>

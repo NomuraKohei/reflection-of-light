@@ -13,10 +13,24 @@ const { title } = Astro.props;
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
+		<header>
+			<p class="menuTitle">Menu</p>
+			<ul class="menuItems">
+				<li class="menuItem"><a href="/" class="link">Top</a></li>
+				<li class="menuItem"><a href="/light" class="link">LIGHT</a></li>
+				<li class="menuItem"><a href="/spin" class="link">SPIN</a></li>
+			</ul>
+		</header>
 		<slot />
 	</body>
 </html>
@@ -30,5 +44,33 @@ const { title } = Astro.props;
 		margin: 0;
 		box-sizing: border-box;
 		overflow: hidden;
+		font-family: 'Play', sans-serif;
+	}
+
+	header {
+		position: absolute;
+		right: 1rem;
+		bottom: 1rem;
+		padding: 16px;
+		padding: 0.5rem 1rem;
+		border-radius: 1rem;
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	.menuTitle {
+		color: #eee;
+	}
+
+	.menuItems {
+		padding: 0;
+		list-style-type: none;
+	}
+
+	.menuItem {
+		margin-bottom: 0.5rem;
+	}
+
+	.link {
+		color: #eee;
 	}
 </style>
