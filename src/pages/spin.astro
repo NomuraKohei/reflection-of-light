@@ -57,6 +57,13 @@ import Layout from '../layouts/Layout.astro';
 				point2.y = p.windowHeight;
 			}
 		};
+
+		p.mousePressed = () => {
+			p.stroke(255);
+			p.fill(255);
+			const ellipseSize = p.random(30, 60);
+			p.ellipse(p.mouseX, p.mouseY, ellipseSize, ellipseSize);
+		};
 	};
 	new p5(sketch);
 </script>
