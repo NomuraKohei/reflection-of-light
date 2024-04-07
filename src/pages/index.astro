@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import light from '../images/light.webp';
+import spin from '../images/spin.webp';
 ---
 
 <Layout title="Generative Art">
@@ -12,13 +15,27 @@ import Layout from '../layouts/Layout.astro';
 			<ul>
 				<li>
 					<a class="card" href="./light">
-						<img src="/light.webp" width="400" height="225" alt="light" class="thumbnail" />
+						<Image
+							src={light}
+							width={400}
+							height={225}
+							alt="light"
+							class="thumbnail"
+							loading="eager"
+						/>
 						<p class="description">Light</p>
 					</a>
 				</li>
 				<li>
 					<a class="card" href="./spin">
-						<img src="/spin.webp" width="400" height="225" alt="spin" class="thumbnail" />
+						<Image
+							src={spin}
+							width={400}
+							height={225}
+							alt="spin"
+							class="thumbnail"
+							loading="eager"
+						/>
 						<p class="description">Spin</p>
 					</a>
 				</li>
