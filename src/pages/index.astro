@@ -1,8 +1,29 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import circle from '../images/circle.webp';
+import gap from '../images/gap.webp';
 import light from '../images/light.webp';
 import spin from '../images/spin.webp';
+
+const workList = [
+	{
+		name: 'circle',
+		src: circle,
+	},
+	{
+		name: 'gap',
+		src: gap,
+	},
+	{
+		name: 'light',
+		src: light,
+	},
+	{
+		name: 'spin',
+		src: spin,
+	},
+];
 ---
 
 <Layout title="Generative Art">
@@ -13,32 +34,23 @@ import spin from '../images/spin.webp';
 		</section>
 		<div class="cardsWrapper">
 			<ul>
-				<li>
-					<a class="card" href="./light">
-						<Image
-							src={light}
-							width={400}
-							height={225}
-							alt="light"
-							class="thumbnail"
-							loading="eager"
-						/>
-						<p class="description">Light</p>
-					</a>
-				</li>
-				<li>
-					<a class="card" href="./spin">
-						<Image
-							src={spin}
-							width={400}
-							height={225}
-							alt="spin"
-							class="thumbnail"
-							loading="eager"
-						/>
-						<p class="description">Spin</p>
-					</a>
-				</li>
+				{
+					workList.map((item) => (
+						<li>
+							<a class="card" href={`./${item.name}`}>
+								<Image
+									src={item.src}
+									width={400}
+									height={225}
+									alt={`The work "${item.name}"`}
+									class="thumbnail"
+									loading="eager"
+								/>
+								<p class="description">{item.name}</p>
+							</a>
+						</li>
+					))
+				}
 			</ul>
 		</div>
 	</main>

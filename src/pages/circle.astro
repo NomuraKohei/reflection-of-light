@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Gap">
+	<main></main>
+</Layout>
+
+<script>
+	import p5 from 'p5';
+
+	const sketch = (p: p5) => {
+		p.setup = () => {
+			p.createCanvas(p.windowWidth, p.windowHeight);
+			p.background('#010103');
+		};
+
+		const center = { x: p.windowWidth / 2, y: p.windowHeight / 2 };
+
+		p.draw = () => {
+			const distance = p.dist(p.mouseX, p.mouseY, center.x, center.y);
+			const entropy = 1 - (distance / p.windowWidth) * 2;
+			p.translate(center.x, center.y);
+			p.beginShape();
+			let numPoints = 360;
+			for (let i = 0; i < numPoints; i++) {
+				let angle = p.map(i, 0, numPoints, 0, p.TWO_PI);
+				let x =
+					(p.cos(angle) * entropy * p.windowWidth) / 6 + p.random(-entropy * 10, entropy * 10);
+				let y =
+					(p.sin(angle) * entropy * p.windowWidth) / 6 + p.random(-entropy * 10, entropy * 10);
+				p.curveVertex(x, y);
+			}
+			p.endShape(p.CLOSE);
+		};
+
+		p.mouseClicked = () => {
+			center.x = p.mouseX;
+			center.y = p.mouseY;
+		};
+	};
+	new p5(sketch);
+</script>

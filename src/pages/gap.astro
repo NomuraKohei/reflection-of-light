@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Gap">
+	<main></main>
+</Layout>
+
+<script>
+	import p5 from 'p5';
+
+	const sketch = (p: p5) => {
+		p.setup = () => {
+			p.createCanvas(p.windowWidth, p.windowHeight);
+			p.background('#010103');
+		};
+
+		p.draw = () => {
+			const top = { x: p.windowWidth / 2 - 200, y: 80 };
+			const bottom = { x: p.windowWidth / 2 + 200, y: p.windowHeight - 80 };
+			const rightAnchor = { x: p.windowWidth / 2 + 800, y: p.windowHeight / 2 - 100 };
+			const leftAnchor = { x: p.windowWidth / 2 - 400, y: p.windowHeight / 2 };
+			p.fill('#FFF');
+			p.beginShape();
+			p.vertex(top.x, top.y);
+			p.quadraticVertex(rightAnchor.x, rightAnchor.y, bottom.x, bottom.y);
+			p.quadraticVertex(leftAnchor.x, leftAnchor.y, top.x, top.y);
+			p.endShape();
+			// const topPoint = { x: 1000, y: 20 };
+			// const bottomPoint = { x: 1000, y: 200 };
+			// const topRightAnchorPoint = { x: topPoint.x - 30, y: topPoint.y + 0 };
+			// const topLeftAnchorPoint = { x: topPoint.x + 30, y: topPoint.y + 20 };
+			// const bottomRightAnchorPoint = { x: bottomPoint.x - 10, y: bottomPoint.y - 100 };
+			// const bottomLeftAnchorPoint = { x: bottomPoint.x + 20, y: bottomPoint.y - 20 };
+
+			// p.noFill();
+			// p.beginShape();
+			// p.vertex(topPoint.x, topPoint.y);
+			// p.bezierVertex(
+			// 	topRightAnchorPoint.x,
+			// 	topRightAnchorPoint.y,
+			// 	80,
+			// 	75,
+			// 	bottomPoint.x,
+			// 	bottomPoint.y
+			// );
+
+			// top-right
+			// p.circle(topPoint.x, topPoint.y, 5);
+			// p.circle(topRightAnchorPoint.x, topRightAnchorPoint.y, 5);
+			// p.line(topPoint.x, topPoint.y, topRightAnchorPoint.x, topRightAnchorPoint.y);
+
+			// // bottom-right
+			// p.circle(bottomPoint.x, bottomPoint.y, 5);
+			// p.circle(bottomRightAnchorPoint.x, bottomRightAnchorPoint.y, 5);
+			// p.line(bottomPoint.x, bottomPoint.y, bottomRightAnchorPoint.x, bottomRightAnchorPoint.y);
+
+			// p.bezierVertex(
+			// 	bottomLeftAnchorPoint.x,
+			// 	bottomLeftAnchorPoint.y,
+			// 	topLeftAnchorPoint.x,
+			// 	topLeftAnchorPoint.y,
+			// 	topPoint.x,
+			// 	topPoint.y
+			// );
+
+			// // bottom-left
+			// p.circle(bottomLeftAnchorPoint.x, bottomLeftAnchorPoint.y, 5);
+			// p.line(bottomPoint.x, bottomPoint.y, bottomLeftAnchorPoint.x, bottomLeftAnchorPoint.y);
+
+			// // top-left
+			// p.circle(topLeftAnchorPoint.x, topLeftAnchorPoint.y, 5);
+			// p.line(topPoint.x, topPoint.y, topLeftAnchorPoint.x, topLeftAnchorPoint.y);
+
+			// p.endShape();
+			// p.stroke('#FF0000');
+			// const topBasicPoint = { x: 360, y: 140 };
+			// const topTopPoint1 = { x: topBasicPoint.x - 200, y: topBasicPoint.y + 20 };
+			// const topBottomPoint2 = { x: topBasicPoint.x + 300, y: topBasicPoint.y + 5 };
+
+			// const underBasicPoint = { x: 380, y: 500 };
+			// const underTopPoint1 = { x: underBasicPoint.x - 200, y: underBasicPoint.y - 30 };
+			// const underBottomPoint2 = { x: underBasicPoint.x - 50, y: underBasicPoint.y + 0 };
+			// p.beginShape();
+			// // p.vertex(underBasicPoint.x, underBasicPoint.y);
+			// p.vertex(topBasicPoint.x, topBasicPoint.y);
+			// p.bezierVertex(
+			// 	underTopPoint1.x,
+			// 	underTopPoint1.y,
+			// 	underBottomPoint2.x,
+			// 	underBottomPoint2.y,
+			// 	underBasicPoint.x,
+			// 	underBasicPoint.y
+			// );
+			// p.bezierVertex(
+			// 	topTopPoint1.x,
+			// 	topTopPoint1.y,
+			// 	topBottomPoint2.x,
+			// 	topBottomPoint2.y,
+			// 	topBasicPoint.x,
+			// 	topBasicPoint.y
+			// );
+			// p.endShape();
+			// p.fill('#FF0000');
+			// p.stroke('#FF0000');
+			// p.circle(underTopPoint1.x, underTopPoint1.y, 5);
+			// p.circle(underBottomPoint2.x, underBottomPoint2.y, 5);
+			// p.circle(underBasicPoint.x, underBasicPoint.y, 5);
+			// p.line(underBasicPoint.x, underBasicPoint.y, underTopPoint1.x, underTopPoint1.y);
+			// p.stroke('#0000FF');
+			// p.line(underBasicPoint.x, underBasicPoint.y, underBottomPoint2.x, underBottomPoint2.y);
+
+			// p.fill('#00FF00');
+			// p.circle(topBasicPoint.x, topBasicPoint.y, 5);
+			// p.circle(topTopPoint1.x, topTopPoint1.y, 5);
+			// p.circle(topBottomPoint2.x, topBottomPoint2.y, 5);
+			// p.stroke('#00FF00');
+			// p.line(topBasicPoint.x, topBasicPoint.y, topTopPoint1.x, topTopPoint1.y);
+			// p.line(topBasicPoint.x, topBasicPoint.y, topBottomPoint2.x, topBottomPoint2.y);
+		};
+	};
+	new p5(sketch);
+</script>
