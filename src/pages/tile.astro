@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Gap">
+	<main></main>
+</Layout>
+
+<script>
+	import p5 from 'p5';
+
+	const sketch = (p: p5) => {
+		p.setup = () => {
+			p.createCanvas(p.windowWidth, p.windowHeight);
+			p.background(230, 210, 100);
+		};
+
+		let isRender = false;
+		const iteration = p.round(p.random(40, 60));
+		const steps =
+			p.windowWidth > p.windowHeight ? p.windowWidth / iteration : p.windowHeight / iteration;
+
+		p.draw = () => {
+			if (isRender) {
+				return;
+			}
+			p.noStroke();
+			for (let i = 0; i < iteration; i++) {
+				for (let j = 0; j < iteration; j++) {
+					const rectOffset = p.random(0, 2);
+					p.fill(80, 170, 180);
+					p.rect(i * steps, j * steps, steps - rectOffset, steps - rectOffset);
+					// p.fill(230, 210, 100);
+					// const radius = p.random(0, steps);
+					// p.arc(
+					// 	i * steps,
+					// 	j * steps,
+					// 	radius,
+					// 	radius,
+					// 	p.random(p.HALF_PI, p.PI),
+					// 	p.random(p.HALF_PI, p.PI)
+					// );
+				}
+			}
+			isRender = true;
+		};
+	};
+	new p5(sketch);
+</script>
